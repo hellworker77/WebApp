@@ -39,12 +39,6 @@ public class Startup
 
         #endregion
     }
-
-    protected virtual void ConfigureAuth(IApplicationBuilder app)
-    {
-        app.UseAuthentication();
-        app.UseAuthorization();
-    }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
