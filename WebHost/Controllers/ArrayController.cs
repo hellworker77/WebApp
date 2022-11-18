@@ -26,17 +26,9 @@ namespace WebHost.Controllers
                 var moduleSum = await _arrayOperationsService.GetModuleSumOfOddValuesAsync(array);
                 result = Ok(moduleSum);
             }
-            catch (JsonReaderException jsonReaderException)
+            catch (Exception exception)
             {
-                result = BadRequest(jsonReaderException.Message);
-            }
-            catch (JsonSerializationException jsonSerializationException)
-            {
-                result = BadRequest(jsonSerializationException.Message);
-            }
-            catch (NullReferenceException nullReferenceException)
-            {
-                result = BadRequest(nullReferenceException.Message);
+                result = BadRequest(exception.Message);
             }
 
             return result;
