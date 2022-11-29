@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using WebHost.Abstractions;
-using WebHost.Exceptions;
+﻿using WebHost.Abstractions;
 
 namespace WebHost.Services;
 
@@ -20,7 +18,8 @@ public class LinkedListOperationsService : ILinkedListOperationsService
             var valueOfFirstNode = GetValueOfLinkedListNode(nodeOfFirstList);
             var valueOfSecondNode = GetValueOfLinkedListNode(nodeOfSecondList);
 
-            currentDigitValue = GetSumOfOperands(currentDigitValue, valueOfFirstNode, valueOfSecondNode, previousDigitRemainder);
+            currentDigitValue = GetSumOfOperands(currentDigitValue, valueOfFirstNode, valueOfSecondNode,
+                previousDigitRemainder);
 
             previousDigitRemainder = currentDigitValue / 10;
             currentDigitValue %= 10;
@@ -31,10 +30,7 @@ public class LinkedListOperationsService : ILinkedListOperationsService
             result.AddFirst(currentDigitValue);
         }
 
-        if (previousDigitRemainder > 0)
-        {
-            result.AddFirst(previousDigitRemainder);
-        }
+        if (previousDigitRemainder > 0) result.AddFirst(previousDigitRemainder);
 
         return await Task.FromResult(result);
     }
@@ -51,25 +47,20 @@ public class LinkedListOperationsService : ILinkedListOperationsService
 
         return await Task.FromResult(list);
     }
+
     private int GetSumOfOperands(int sum, params int[] values)
     {
         foreach (var value in values)
-        {
             if (value > 0)
-            {
                 sum += value;
-            }
-        }
 
         return sum;
     }
+
     private int GetValueOfLinkedListNode(LinkedListNode<int>? node)
     {
         var value = -1;
-        if (node != null)
-        {
-            value = node.Value;
-        }
+        if (node != null) value = node.Value;
 
         return value;
     }
